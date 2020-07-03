@@ -1,7 +1,31 @@
-# noteful-client
-Revisit the Noteful application that you have been building. So far you have built a react client and an Express server. In this assignment, you will set up a database on Heroku for the Noteful application and redeploy the full stack application.
+## Noteful JSON Server
 
-Configure the server for deployment. Add a database on Heroku and setup the migration scripts to create the remote database on deploy. Perform the deploy and note the URL of the deployed application. Use Postman to verify that the server is properly deployed and works as expected.
-Update the React client with the URL of the server. Run the client locally to ensure that it can fetch the data from the remote server correctly. Deploy the React client to Zeit. If you get CORS errors after the deploy, modify the CORS settings on the server and redeploy the server.
-  Live app:https://young-temple-34058.herokuapp.com/
-# noteful
+This is a project for education purposes created by Thinkful.
+
+This is a json-server managed API meant for developing `noteful-client` projects.
+
+Once started, this will run a local API server on `http://localhost:9090`.
+
+If you navigate to the base URL there will be a HTML documentation page displayed.
+
+There are two top level endpoints:
+
+- /folders
+- /notes
+
+Both support GET, POST, PUT, PATCH and DELETE requests. For PUT, PATCH and DELETE requests you must supply the respective id in the endpoint's path.
+
+For example:
+
+- GET /notes
+- GET /folders
+- POST /notes
+- POST /folders
+- PATCH /notes/{note-id}/
+- PATCH /folders/{folder-id}/
+- DELETE /notes/{note-id}/
+- DELETE /folders/{folder-id}/
+
+To start the server, run `npm start`.
+
+The database is initiated from the `db.js` file whenever the server is started. No data is persisted after the server has been shut down.
