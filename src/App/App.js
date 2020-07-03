@@ -8,8 +8,11 @@ import NotePageMain from '../NotePageMain/NotePageMain'
 import AddFolder from '../AddFolder/AddFolder'
 import AddNote from '../AddNote/AddNote'
 import ApiContext from '../ApiContext'
-// import config from '../config'
+import config from '../config'
 import './App.css'
+// import Currency from './Currency'
+// import CurrencyError from './CurrencyError'
+
 
 class App extends Component {
   state = {
@@ -17,29 +20,29 @@ class App extends Component {
     folders: [],
   };
 
-  // componentDidMount() {
-  //   Promise.all([
-  //     fetch(`${config.API_ENDPOINT}/notes`),
-  //     fetch(`${config.API_ENDPOINT}/folders`)
-  //   ])
-  //     .then(([notesRes, foldersRes]) => {
-  //       if (!notesRes.ok)
-  //         return notesRes.json().then(e => Promise.reject(e))
-  //       if (!foldersRes.ok)
-  //         return foldersRes.json().then(e => Promise.reject(e))
+  componentDidMount() {
+    Promise.all([
+      fetch(`${config.API_ENDPOINT}/notes`),
+      fetch(`${config.API_ENDPOINT}/folders`)
+    ])
+      .then(([notesRes, foldersRes]) => {
+        if (!notesRes.ok)
+          return notesRes.json().then(e => Promise.reject(e))
+        if (!foldersRes.ok)
+          return foldersRes.json().then(e => Promise.reject(e))
 
-  //       return Promise.all([
-  //         notesRes.json(),
-  //         foldersRes.json(),
-  //       ])
-  //     })
-  //     .then(([notes, folders]) => {
-  //       this.setState({ notes, folders })
-  //     })
-  //     .catch(error => {
-  //       console.error({ error })
-  //     })
-  // }
+        return Promise.all([
+          notesRes.json(),
+          foldersRes.json(),
+        ])
+      })
+      .then(([notes, folders]) => {
+        this.setState({ notes, folders })
+      })
+      .catch(error => {
+        console.error({ error })
+      })
+  }
 
   handleAddFolder = folder => {
     this.setState({
@@ -128,7 +131,11 @@ class App extends Component {
       deleteNote: this.handleDeleteNote,
     }
     return (
-      <ApiContext.Provider value={value}>
+      <ApiContext.Provider value={value}> 
+        {/* <CurrencyError>
+          Germany: <Currency value={21} locale="de-DE" currency="US"/>
+          USA: <Currency value={21} locale="en-US" currency="USD"/>
+        </CurrencyError> */}
         <div className='App'>
           <nav className='App__nav'>
             {this.renderNavRoutes()}
@@ -150,4 +157,3 @@ class App extends Component {
 }
 
 export default App
-
